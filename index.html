@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Deepak Singh Portfolio</title>
 
+    <!-- Lottie Animation -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -15,12 +18,64 @@
         body {
             background: linear-gradient(to bottom, #0f172a, #020617, black);
             color: white;
-            padding: 40px;
+            overflow-x: hidden;
         }
+
+        /* ================= INTRO SCREEN ================= */
+
+        #intro {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999;
+            animation: fadeOut 1.2s ease-in-out 5s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .intro-text {
+            font-size: 34px;
+            margin-top: 20px;
+            color: cyan;
+            letter-spacing: 2px;
+            border-right: 3px solid cyan;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2.5s steps(40, end) 1s forwards,
+                       blink 0.6s infinite;
+        }
+
+        @keyframes typing {
+            to { width: 520px; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* ================= MAIN PORTFOLIO ================= */
 
         .container {
             max-width: 1200px;
             margin: auto;
+            padding: 40px;
+            opacity: 0;
+            animation: showContent 1s ease 5.3s forwards;
+        }
+
+        @keyframes showContent {
+            to { opacity: 1; }
         }
 
         .hero {
@@ -31,36 +86,32 @@
             min-height: 80vh;
         }
 
-        h1 {
-            font-size: 52px;
-        }
-
-        h2 {
-            color: cyan;
-            margin: 10px 0;
-        }
+        h1 { font-size: 52px; }
+        h2 { color: cyan; margin: 10px 0; }
 
         p {
             color: #9ca3af;
             line-height: 1.6;
         }
 
-        .buttons {
-            margin-top: 20px;
-        }
-
         .btn {
             padding: 12px 24px;
-            border-radius: 20px;
+            border-radius: 25px;
             border: none;
             cursor: pointer;
             margin-right: 10px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
         .primary {
             background: cyan;
             color: black;
+        }
+
+        .primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px cyan;
         }
 
         .outline {
@@ -69,18 +120,9 @@
             color: white;
         }
 
-        .icons {
-            margin-top: 20px;
-        }
-
-        .icons span {
-            margin-right: 15px;
-            cursor: pointer;
-            color: gray;
-        }
-
-        .icons span:hover {
-            color: white;
+        .outline:hover {
+            border-color: cyan;
+            color: cyan;
         }
 
         .profile-img {
@@ -91,9 +133,7 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
         }
 
         .grid {
@@ -114,6 +154,7 @@
 
         .card:hover {
             transform: translateY(-5px);
+            border-color: cyan;
         }
 
         .skills {
@@ -129,7 +170,6 @@
             padding: 10px;
             border-radius: 10px;
             font-size: 14px;
-            color: #d1d5db;
             transition: 0.3s;
         }
 
@@ -138,9 +178,7 @@
             border-color: cyan;
         }
 
-        .projects {
-            margin-top: 80px;
-        }
+        .projects { margin-top: 80px; }
 
         .project-grid {
             display: grid;
@@ -158,6 +196,7 @@
 
         .project-card:hover {
             transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0,255,255,0.15);
         }
 
         .project-img {
@@ -167,42 +206,42 @@
             margin-bottom: 10px;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeIn 0.8s forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         @media (max-width: 900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .grid { grid-template-columns: 1fr; }
+            .project-grid { grid-template-columns: 1fr; }
+            .intro-text { font-size: 22px; animation: typingMobile 2s steps(30,end) 1s forwards; }
+            @keyframes typingMobile { to { width: 320px; } }
         }
     </style>
 </head>
 
 <body>
 
+<!-- ================= INTRO ================= -->
+
+<div id="intro">
+
+    <lottie-player
+        src="https://assets10.lottiefiles.com/packages/lf20_tfb3estd.json"
+        background="transparent"
+        speed="1"
+        style="width: 280px; height: 280px;"
+        autoplay
+        loop>
+    </lottie-player>
+
+    <div class="intro-text">
+        Welcome to My Portfolio Deepak
+    </div>
+
+</div>
+
+<!-- ================= MAIN CONTENT ================= -->
+
 <div class="container">
 
-    <!-- HERO -->
-    <div class="hero fade-in">
+    <div class="hero">
         <div>
             <h1>Deepak Singh</h1>
             <h2>Full Stack Software Developer</h2>
@@ -211,36 +250,23 @@
                 applications with clean UI and smooth user experience.
             </p>
 
-            <div class="buttons">
+            <div style="margin-top:20px;">
                 <button class="btn primary">View Projects</button>
                 <button class="btn outline">Download Resume</button>
-            </div>
-
-            <div class="icons">
-                <span>GitHub</span>
-                <span>LinkedIn</span>
-<a href="mailto:deepak954807@gmail.com">
-    <span>Email</span>
-</a>
-
             </div>
         </div>
 
         <div style="text-align:center;">
-            <!-- Replace with your image -->
-            <img src="unnamed.jpg" class="profile-img">
+            <img src="profile.png" class="profile-img">
         </div>
     </div>
 
-    <!-- ABOUT + SKILLS -->
-    <div class="grid fade-in">
-
+    <div class="grid">
         <div class="card">
             <h2>About Me</h2>
             <p>
-                Passionate software developer focused on creating efficient,
-                scalable, and visually appealing applications. I enjoy solving
-                complex problems and crafting clean, maintainable code.
+                Passionate software developer focused on building efficient,
+                scalable, and visually appealing applications.
             </p>
         </div>
 
@@ -250,10 +276,8 @@
         </div>
     </div>
 
-    <!-- PROJECTS -->
-    <div class="projects fade-in">
+    <div class="projects">
         <h2 style="font-size:32px;">Projects</h2>
-
         <div class="project-grid" id="projects"></div>
     </div>
 
@@ -261,53 +285,27 @@
 
 <script>
     const skills = [
-        "ASP.NET MVC",
-        "AngularJS",
-        "React",
-        "SQL Server",
-        "ADO.NET",
-        "JavaScript",
-        "C#",
-        "Java",
-        "Spring Boot",
-        "Hibernate",
-        "AI / Machine Learning",
-        "Deep Learning",
-        "Python (AI)",
-        "REST APIs"
+        "ASP.NET MVC", "AngularJS", "React",
+        "SQL Server", "ADO.NET", "JavaScript",
+        "C#", "Java", "Spring Boot"
     ];
 
     const projects = [
-        {
-            title: "Student Management System",
-            description: "Full CRUD application with validation, file upload, and pagination features."
-        },
-        {
-            title: "AI-Based Recommendation System",
-            description: "Machine learning model providing intelligent recommendations based on user behavior."
-        },
-        {
-            title: "Java Spring Boot Application",
-            description: "Enterprise-grade backend application built with Spring Boot, Hibernate, and REST APIs."
-        },
-        {
-            title: "Dynamic Dashboard",
-            description: "Interactive UI with charts, filters, and real-time data updates."
-        }
+        { title: "Student Management System", description: "Full CRUD application." },
+        { title: "AI Recommendation Engine", description: "ML-based predictions." },
+        { title: "Spring Boot Backend", description: "Enterprise REST APIs." }
     ];
 
-    const skillsContainer = document.getElementById("skills");
     skills.forEach(skill => {
-        skillsContainer.innerHTML += `<div class="skill">${skill}</div>`;
+        document.getElementById("skills").innerHTML += `<div class="skill">${skill}</div>`;
     });
 
-    const projectsContainer = document.getElementById("projects");
     projects.forEach(project => {
-        projectsContainer.innerHTML += `
+        document.getElementById("projects").innerHTML += `
             <div class="project-card">
                 <div class="project-img"></div>
                 <h3>${project.title}</h3>
-                <p style="font-size:14px; margin:8px 0; color:gray;">
+                <p style="font-size:14px; color:gray; margin:8px 0;">
                     ${project.description}
                 </p>
                 <button class="btn primary" style="padding:8px 16px; font-size:13px;">
@@ -320,6 +318,3 @@
 
 </body>
 </html>
-
-
-
